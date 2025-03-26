@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Recherche d'Articles</title>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+<div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center">Recherche d'Articles d'Actualité</h1>
+    <form method="get" action="/news/search" class="flex gap-4 mb-6">
+        <input type="text" name="keyword" placeholder="Mot-clé..." class="flex-grow p-3 border rounded-lg" />
+        <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Rechercher</button>
+    </form>
+
+    <div>
+        <!-- articles affichés ici -->
+        <div th:each="article : ${articles}" class="bg-white rounded-lg shadow-md p-4 mb-4">
+            <h2 class="text-xl font-semibold" th:text="${article.title}"></h2>
+            <p class="text-gray-600 text-sm" th:text="${article.description}"></p>
+            <a class="text-blue-500 mt-2 block" th:href="${article.url}" target="_blank">Lire l'article</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
