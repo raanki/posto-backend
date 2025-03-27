@@ -2,13 +2,17 @@ package fr.posto.project.Posto.factory;
 
 import fr.posto.project.Posto.model.Article;
 import fr.posto.project.Posto.model.Source;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.time.LocalDateTime;
 
-public class ArticleFactory {
+@Component
+public interface ArticleFactory extends JpaRepository<Article, Long> {
 
-    public Article createArticle(
+    public default Article createArticle(
+            Long id,
             String title,
             String description,
             String url,
@@ -16,10 +20,12 @@ public class ArticleFactory {
             String urlToImage,
             LocalDateTime publishedAt,
             Source source,
-            TextArea content
+            String content
     ) {
+
         Article article = new Article();
         article.setTitle(title);
+        article.setExternId(id);
         article.setDescription(description);
         article.setUrl(url);
         article.setAuthor(author);
